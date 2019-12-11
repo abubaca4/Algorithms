@@ -164,19 +164,27 @@ std::string String::std_type() const
 
 size_t String::find(const String& P) const
 {
-	String temp(P + String("#") + *this);
-	Vector<size_t> prefix(temp.length(), 0);
-	for (size_t i = 1; i < temp.length(); i++)
+	Vector<size_t> prefix(P.length(), 0);
+	for (int k = 0, i = 1; i < P.length(); ++i)
 	{
-		size_t k = prefix[i - 1];
-		while (k > 0 && temp[i] != temp[k])
+		while ((k > 0) && (P[i] != P[k]))
 			k = prefix[k - 1];
-		if (temp[i] == temp[k])
+
+		if (P[i] == P[k])
 			k++;
+
 		prefix[i] = k;
 	}
-	for (size_t i = 0; i < data_size; i++)
-		if (prefix[P.data_size + i + 1] == P.data_size)
-			return (i - P.data_size + 1);
+	for (int k = 0, i = 0; i < data_size; ++i)
+	{
+		while ((k > 0) && (P[k] != data[i]))
+			k = prefix[k - 1];
+
+		if (P[k] == data[i])
+			k++;
+
+		if (k == P.length())
+			return (i - P.length() + 1);
+	}
 	return -1;
 }
