@@ -22,23 +22,23 @@ public:
 	// Retrieves the first item from the list
 	ListItem<Data>* first() const;
 	// Extracts data from the list item
-	Data item_data(const ListItem<Data>* item) const;
+	static Data item_data(const ListItem<Data>* item);
 	// Returns list item following after the specified one
-	ListItem<Data>* item_next(ListItem<Data>* item) const;
+	static ListItem<Data>* item_next(ListItem<Data>* item);
 	// Returns previous element for the specified item.
 	// Not applicable for the singly linked lists.
 	//ListItem* item_prev(ListItem* item);
 	// Inserts new list item into the beginning
 	ListItem<Data>* insert(const Data &data);
 	// Inserts new list item after the specified item
-	ListItem<Data>* insert_after(ListItem<Data>* item, const Data &data);
+	static ListItem<Data>* insert_after(ListItem<Data>* item, const Data &data);
 	// Deletes the specified list item.
 	// Not applicable for the singly linked lists.
 	// Should be O(1)
 	//ListItem* erase(ListItem* item);
 	// Deletes the list item following the specified one
 	// Should be O(1)
-	ListItem<Data>* erase_next(ListItem<Data>* item);
+	static ListItem<Data>* erase_next(ListItem<Data>* item);
 	ListItem<Data>* erase_first();
 };
 
@@ -67,13 +67,13 @@ ListItem< Data >* List < Data > ::first() const
 }
 
 template<typename Data>
-Data List< Data > ::item_data(const ListItem<Data>* item) const
+Data List< Data > ::item_data(const ListItem<Data>* item)
 {
 	return item->item;
 }
 
 template<typename Data>
-ListItem<Data>* List< Data > ::item_next(ListItem<Data>* item) const
+ListItem<Data>* List< Data > ::item_next(ListItem<Data>* item)
 {
 	return item->Next;
 }
