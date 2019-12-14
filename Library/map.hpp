@@ -178,11 +178,11 @@ Map<KeyType, DataType, q>::~Map()
 template <typename KeyType, typename DataType, unsigned int q>
 void Map<KeyType, DataType, q>::add(const KeyType& first, const DataType& second)
 {
+	if (data->size() / 2 == used)
+		resize_cont(data->size() * 2);
 	Pair temp = new MapPair<KeyType, DataType>(first, second);
 	uint32_t i = temp->Hash() % data->size();
 	uint32_t start = i;
-	if (data->size() / 2 == used)
-		resize_cont(data->size() * 2);
 	while ((*data)[i] != NULL && (*data)[i] != (Pair)0x000001)
 	{
 		i = (i + q) % data->size();
