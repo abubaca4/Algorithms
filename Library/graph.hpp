@@ -66,24 +66,24 @@ bool Graph<vertex_tag, edge_tag>::remove_vertex(const size_t i)
 	if (i >= size)
 		return false;
 	size--;
-	for (size_t j = i + 1; j < size; j++)
+	for (size_t j = i; j < size; j++)
 		vertex_tags[j] = vertex_tags[j + 1];
 	vertex_tags.resize(size);
 	for (size_t j = 0; j < i; j++)
 	{
-		for (size_t k = i + 1; k < size; k++)
+		for (size_t k = i; k < size; k++)
 			edge_tags[j][k] = edge_tags[j][k + 1];
 		edge_tags[j].resize(size);
-		for (size_t k = i + 1; k < size; k++)
+		for (size_t k = i; k < size; k++)
 			mat[j][k] = mat[j][k + 1];
 		mat[j].resize(size);
 	}
 	for (size_t j = i; i < size; j++)
 	{
-		for (size_t k = i + 1; k < size; k++)
+		for (size_t k = i; k < size; k++)
 			edge_tags[j + 1][k] = edge_tags[j + 1][k + 1];
 		edge_tags[j + 1].resize(size);
-		for (size_t k = i + 1; k < size; k++)
+		for (size_t k = i; k < size; k++)
 			mat[j + 1][k] = mat[j + 1][k + 1];
 		mat[j + 1].resize(size);
 		edge_tags[j] = edge_tags[j + 1];
